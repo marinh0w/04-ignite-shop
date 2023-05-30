@@ -11,10 +11,10 @@ export const HomeContainer = styled("main", {
 export const Product = styled("a", {
     background: 'linear-gradiant(180deg, #1ea483 0%, #7465d4 100%)',
     borderRadius: 8,
-    padding: '0.5rem',
+    // padding: '0.5rem',
     cursor: "pointer",
     position: "relative",
-    overflow: "hidden",
+    overflow: "hidden",    
 
     display: "flex",
     justifyContent: "center",
