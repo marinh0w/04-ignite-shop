@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 globalStyles();
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return
   <Container>
     <Header>
@@ -16,3 +16,5 @@ export default function App({ Component, pageProps }: AppProps) {
     <Component {...pageProps} />;
   </Container>;
 }
+
+export default App

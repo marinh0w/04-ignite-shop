@@ -2,12 +2,13 @@ import {
   ImageContainer,
   ProductContainer,
   ProductDetails,
-} from "@/styles/pages/product";
+} from "../../styles/pages/product";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useState } from "react";
 import stripe from "stripe";
 import Image from "next/image";
+import Head from "next/head";
 
 interface ProductProps {
   product: {
@@ -48,7 +49,7 @@ export default function Product({ product }: ProductProps) {
     <>
      <Head>
         <title>{product.name} | Ignite Shop</title>
-      </Head>
+     </Head>
 
     <ProductContainer>
       <ImageContainer>

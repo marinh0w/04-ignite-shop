@@ -25,7 +25,7 @@ interface HomeProps {
   }[];
 }
 
-export default function Home({ products }) {
+export default function Home({ products }: HomeProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -40,10 +40,10 @@ export default function Home({ products }) {
       </Head>
 
       <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map(product => {
+        {products.map((product) => {
           return (
             <Link
-              href={"/product/${product.id}"}
+              href={`/product/${product.id}`}
               key={product.id}
               prefetch={false}
             >
@@ -75,6 +75,7 @@ export const getStaticProps: GetStaticProps = async ({}) => {
 
   const products = response.data.map((product) => {
     const price = product.default_price as Stripe.Price;
+
     return {
       id: product.id,
       name: product.name,
