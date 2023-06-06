@@ -5,8 +5,9 @@ import {
 } from "@/styles/pages/product";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import stripe from "stripe";
+import Image from "next/image";
 
 interface ProductProps {
   product: {
@@ -21,7 +22,7 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {    
-  const [ísCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
   
   async function handleBuyProduct() {
     try {
@@ -45,8 +46,10 @@ export default function Product({ product }: ProductProps) {
 
   return (
     <ProductContainer>
-      <ImageContainer></ImageContainer>
+      <ImageContainer>
         <Image src={product.imageUrl} width={520} height={480} alt="" />
+      </ImageContainer>
+
       <ProductDetails>
         <h1>{product.name}</h1>
         <span>{product.price}</span>
@@ -55,7 +58,7 @@ export default function Product({ product }: ProductProps) {
           {product.description}
         </p>
 
-        <button disabled={setIsCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar agora</button>
+        <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar agora</button>
       </ProductDetails>
     </ProductContainer>
   );
@@ -70,12 +73,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
-  params,
-}) => {
-  const productId = params.id;
+export const getStaticProps: GetStaticProps<any, { id: string }> = async ({params})
+ => { const productId = params.id;
 
-  const product = await stripe.products.retrive(productId, {
+  const product = await stripe.products.retrieve(productId, {
     expand: ["default_price"],
   });
 
